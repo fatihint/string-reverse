@@ -13,7 +13,7 @@ public class DemoApplication {
 
 	@RequestMapping("/")
 	@ResponseBody
-	String home(@RequestParam(value = "input") String param) {
+	String home(@RequestParam(value = "input", required = false) String param) {
 	    if (param == null)
 	        return "Please provide a parameter named `input` in url...";
 		return stringReverse(param);
@@ -28,11 +28,14 @@ public class DemoApplication {
 	    char[] strToChar = param.toCharArray();
 	    char[] charToStr = new char[strToChar.length];
 
-	    for (int i = strToChar.length - 1; i >= 0; i++ ) {
-	        charToStr[i] = strToChar[i];
+	    int j = 0;
+
+	    for (int i = strToChar.length - 1; i >= 0; i--) {
+	        charToStr[j] = strToChar[i];
+	        j++;
         }
 
-        return charToStr.toString();
+        return String.valueOf(charToStr);
 
     }
 }
